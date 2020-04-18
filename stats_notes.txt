@@ -1,0 +1,24 @@
+Stats
+=====
+Rule: Each mini-game must correspond to a stat you want to raise/maintain.
+Some can be time-based.
+
+Core Stats:
+-----------
+- Hunger
+  > Feed the baby some food. Baby mouth closes and open at random intervals. You got to
+  time it right and put the food in the baby's mouth. The spoon shakes as well (as extra
+  challenge). Failed to put it in baby gets upset. Time-based and bar-fill.
+  
+- Thirst
+  > Some sliders to adjust the heat. Click finish to stop it at the right temperature. Need to get it just right.
+  
+- Cleanliness
+  > Use your mouth to scrub the baby. Time-based and points-based. Higher the point, higher the cleanliness will go up.
+  
+- Toilet
+  > ???
+- Gas (Burping)
+  > Hit the baby not too hard but not too soft. Strength-check like mini-game.
+- Boredom
+  > Keep selecting the right toys to give to the baby. Some toys give higher points. Time-based
