@@ -578,6 +578,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e8923d4e3022640b4646e0bba1caa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userLogLabel: {fileID: 2087916328}
+  days:
+  - dayNumber: 0
+  - dayNumber: 1
+  - dayNumber: 2
+  - dayNumber: 3
+  - dayNumber: 4
 --- !u!1 &989077381
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +847,7 @@ GameObject:
   - component: {fileID: 1492628251}
   - component: {fileID: 1492628250}
   m_Layer: 5
-  m_Name: PanelReactionStatus
+  m_Name: PanelUserLog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
