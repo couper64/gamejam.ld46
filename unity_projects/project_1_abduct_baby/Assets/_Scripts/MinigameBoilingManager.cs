@@ -31,11 +31,20 @@
             // Let user know.
             timerLabel.text = (duration - timer).ToString("00");
 
-            if (timer >= duration) 
+            // Is it the time to stop the game?
+            if (timer >= duration)
             {
-                // End of the mini game.
-                // Go back to main screen.
-                FindObjectOfType<GameManager>().UnloadMinigame("MinigameBoiling");
+                // Local variabbles.
+                GameManager gameManager;
+
+                // Find.
+                gameManager = FindObjectOfType<GameManager>();
+
+                // Tell manager to set default mood for baby.
+                gameManager.baby.SetDefaultMood();
+
+                // And, return back to gameplay scene.
+                gameManager.UnloadMinigame("MinigameBoiling", 10);
             }
 
             temperatureLabel.text = sliderFireStrength.value.ToString() + " (c)";

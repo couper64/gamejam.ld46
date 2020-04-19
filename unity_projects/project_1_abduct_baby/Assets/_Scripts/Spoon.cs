@@ -27,6 +27,8 @@
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
 			GetComponentInChildren<AudioSource>().Play();
+
+			FindObjectOfType<MinigameFeedingManager>().score++;
 		}
 	}
 }
