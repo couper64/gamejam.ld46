@@ -1,5 +1,8 @@
 ﻿namespace LD46
 {
+    // IEnumerator.
+    using System.Collections;
+
     // Monobehaviour.
     using UnityEngine;
 
@@ -8,8 +11,7 @@
 
     // SceneManager.
     using UnityEngine.SceneManagement;
-    using System.Collections;
-    using System.Threading;
+    using System.Data;
 
     /// <summary>
     /// One script to rule them all.
@@ -25,13 +27,10 @@
     {
         public int dayCount;
         public int dayFinal;
-        public Text timerLabel;
         public Text userLog;
         public Button buttonMinigameFeeding;
         public Button buttonMinigameBoiling;
-        public GameObject panelLeft;
-        public GameObject panelRight;
-        public GameObject panelBottom;
+        public Canvas canvasMain;
         public AudioSource mouseAudioSource;
         public Baby baby;
 
@@ -50,83 +49,36 @@
             enabled = false;
         }
 
-        public void LoadMinigameFeeding() 
+        public void LoadMinigame(string sceneName) 
         {
-            SceneManager.LoadSceneAsync("MinigameFeeding", LoadSceneMode.Additive);
+            // Load additively, so the gameplay scene stays loaded.
+            SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
-            panelLeft.SetActive(false);
-            panelRight.SetActive(false);
-            panelBottom.SetActive(false);
-
-            StartCoroutine(PlayMinigameFeeding());
+            // Hide gameplay UI.
+            canvasMain.gameObject.SetActive(false);
         }
 
-        public void LoadMinigameBoiling() 
+        public void UnloadMinigame(string sceneName) 
         {
-            SceneManager.LoadSceneAsync("MinigameBoiling", LoadSceneMode.Additive);
+            // Unload it.
+            SceneManager.UnloadSceneAsync(sceneName);
 
-            panelLeft.SetActive(false);
-            panelRight.SetActive(false);
-            panelBottom.SetActive(false);
-        }
-
-        private IEnumerator PlayMinigameFeeding() 
-        {
-            float timer = 0.00f;
-            float moodTimer = 0.00f;
-            float delay = 60.00f;
-            float moodDelay = 3.00f;
-            BoxCollider2D collider = baby.GetComponent<BoxCollider2D>();
-            timerLabel.gameObject.SetActive(true);
-
-            while (true)
-            {
-                timer += Time.deltaTime;
-                moodTimer += Time.deltaTime;
-
-                if (moodTimer >= moodDelay) 
-                {
-                    collider.enabled = !collider.enabled;
-
-                    if (collider.enabled)
-                    {
-                        baby.animationState = Baby.AnimationState.Idle;
-                    }
-                    else 
-                    {
-                        baby.animationState = Baby.AnimationState.Closed_Mouth;
-                    }
-
-                    moodTimer = 0.00f;
-                }
-
-                if (timer >= delay) 
-                {
-                    break;
-                }
-
-                timerLabel.text = (delay - timer).ToString("00");
-
-                yield return new WaitForEndOfFrame();
-            }
-
-            SceneManager.UnloadSceneAsync("MinigameFeeding");
-
-            panelLeft.SetActive(true);
-            panelRight.SetActive(true);
-            panelBottom.SetActive(true);
-
-            collider.enabled = false;
-
-            timerLabel.gameObject.SetActive(false);
+            // Load the main gameplay UI.
+            canvasMain.gameObject.SetActive(true);
         }
 
         private void Start()
         {
-            buttonMinigameFeeding.onClick.AddListener(LoadMinigameFeeding);
+            buttonMinigameFeeding.onClick.AddListener
+            (
+                delegate { LoadMinigame("MinigameFeeding"); }
+            );
             buttonMinigameFeeding.GetComponentInChildren<Text>().text = "Feed Baby";
 
-            buttonMinigameBoiling.onClick.AddListener(LoadMinigameBoiling);
+            buttonMinigameBoiling.onClick.AddListener
+            (
+                delegate { LoadMinigame("MinigameBoiling"); }
+            );
             buttonMinigameBoiling.GetComponentInChildren<Text>().text = "Boil Milk";
 
             userLog.text = string.Format("It's a happy day {0}!", ++dayCount);

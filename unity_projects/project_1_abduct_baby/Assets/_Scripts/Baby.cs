@@ -1,5 +1,7 @@
 ﻿namespace LD46
 {
+    using System;
+
     // MonoBehaviour.
     using UnityEngine;
 
@@ -26,11 +28,32 @@
         public AnimationState animationState;
         public int animatorParameterId;
 
+        public BoxCollider2D mouthCollider;
+
+        public void SetDefaultMood() 
+        {
+            animationState = AnimationState.Idle;
+        }
+
+        public void SetRandomMood() 
+        {
+            // Convert into an array to pick up randomly from.
+            Array states = Enum.GetValues(typeof(AnimationState));
+
+            // Generate random index to pick.
+            int randomIndex = UnityEngine.Random.Range(0, states.Length);
+
+            // New animation state.
+            animationState = (AnimationState)states.GetValue(randomIndex);
+        }
+
         private void Start()
         {
             animator = GetComponentInChildren<Animator>();
             animationState = AnimationState.Idle;
             animatorParameterId = Animator.StringToHash("State");
+
+            mouthCollider = GetComponent<BoxCollider2D>();
         }
 
         private void Update()
@@ -44,6 +67,17 @@
             toiletLabel.text = string.Format("Toilet: {0}", toilet.ToString("0.0"));
 
             animator.SetInteger(animatorParameterId, (int)animationState);
+
+            switch (animationState)
+            {
+                case AnimationState.Idle: 
+                    mouthCollider.enabled = true;
+                    break;
+
+                case AnimationState.Closed_Mouth: 
+                    mouthCollider.enabled = false;
+                    break;
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
