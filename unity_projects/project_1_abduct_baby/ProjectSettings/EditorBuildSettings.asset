@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/MinigameCleaning.unity
     guid: 5034d11de898a8b4e920bfd89cf80b19
+  - enabled: 1
+    path: Assets/_Scenes/MinigameBurping.unity
+    guid: e9979bb900c8c714888c73b48bb263c2
   m_configObjects: {}

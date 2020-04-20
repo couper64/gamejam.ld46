@@ -144,7 +144,7 @@
                 baby.burp += direction;
 
                 // Setup sounds.
-                scoringUpAudioSource.pitch = 1.00f + (float)i / thurstScore;
+                scoringUpAudioSource.pitch = 1.00f + (float)i / burpScore;
 
                 // Play sounds.
                 scoringUpAudioSource.Play();
@@ -260,6 +260,12 @@
                 delegate { LoadMinigame("MinigameCleaning"); }
             );
             buttonMinigameCleaning.GetComponentInChildren<Text>().text = "Clean";
+
+            buttonMinigamePatting.onClick.AddListener
+            (
+                delegate { LoadMinigame("MinigameBurping"); }
+            );
+            buttonMinigamePatting.GetComponentInChildren<Text>().text = "Patting";
 
             // Player starts from day 1!
             NextDay();
