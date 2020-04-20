@@ -75,9 +75,6 @@
                 // Find.
                 gameManager = FindObjectOfType<GameManager>();
 
-                // Tell manager to set default mood for baby.
-                gameManager.baby.SetDefaultMood();
-
                 // And, return back to gameplay scene.
                 gameManager.UnloadMinigame("MinigameCleaning", 0, score, 0, 0);
             }

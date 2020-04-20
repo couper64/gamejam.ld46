@@ -10,12 +10,14 @@
     {
         public float timer;
         public float duration;
+        public Slider sliderTimer;
 
         public float moodTimer;
         public float moodDuration;
         public float moodMaxDuration;
 
         public int score;
+        public Slider sliderScore;
 
         // Whether user wants to go back to home screne,
         // after finishing the game.
@@ -23,20 +25,28 @@
         public GameObject panelGameOver;
         public Text gameOverLabel;
 
-        public Text timerLabel;
-
         public void SetFinished(bool finished) 
         {
             isFinished = finished;
         }
 
+        private void Start()
+        {
+            // Setup slider to meet timer settings.
+            sliderTimer.maxValue = duration;
+            sliderTimer.value = duration;
+        }
+
         private void Update()
         {
+            // Update user with a new score.
+            sliderScore.value = score;
+
             // Minigame ticking.
             timer += Time.deltaTime;
 
             // Let user know.
-            timerLabel.text = (duration - timer).ToString("00");
+            sliderTimer.value = duration - timer;
 
             // Is it the time to stop the game?
             if (timer >= duration)
@@ -74,13 +84,19 @@
                 }
 
                 // Local variabbles.
+                BabyFeeding babyFeeding;
+
+                // Find.
+                babyFeeding = FindObjectOfType<BabyFeeding>();
+
+                // Tell manager to set default mood for baby.
+                babyFeeding.SetDefaultMood();
+
+                // Local variabbles.
                 GameManager gameManager;
 
                 // Find.
                 gameManager = FindObjectOfType<GameManager>();
-
-                // Tell manager to set default mood for baby.
-                gameManager.baby.SetDefaultMood();
 
                 // And, return back to gameplay scene.
                 gameManager.UnloadMinigame("MinigameFeeding", score, 0, 0, 0);
@@ -97,13 +113,13 @@
                 moodDuration = Random.Range(1.00f, moodMaxDuration);
 
                 // Local variabbles.
-                GameManager gameManager;
+                BabyFeeding babyFeeding;
 
                 // Find.
-                gameManager = FindObjectOfType<GameManager>();
+                babyFeeding = FindObjectOfType<BabyFeeding>();
 
                 // Tell manager to set new random mood for baby.
-                gameManager.baby.SetRandomMood();
+                babyFeeding.SetRandomMood();
             }
         }
     }
