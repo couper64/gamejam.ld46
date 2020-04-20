@@ -79,14 +79,5 @@
                     break;
             }
         }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            hunger++;
-        }
-
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-        }
     }
 }

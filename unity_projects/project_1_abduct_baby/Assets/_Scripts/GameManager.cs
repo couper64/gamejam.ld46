@@ -210,6 +210,9 @@
                 delegate { LoadMinigame("MinigameBoiling"); }
             );
             buttonMinigameBoiling.GetComponentInChildren<Text>().text = "Boil Milk";
+
+            // Player starts from day 1!
+            NextDay();
         }
 
         private void Update()
