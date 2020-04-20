@@ -247,25 +247,21 @@
             (
                 delegate { LoadMinigame("MinigameFeeding"); }
             );
-            buttonMinigameFeeding.GetComponentInChildren<Text>().text = "Feed Baby";
 
             buttonMinigameBoiling.onClick.AddListener
             (
                 delegate { LoadMinigame("MinigameBoiling"); }
             );
-            buttonMinigameBoiling.GetComponentInChildren<Text>().text = "Boil Milk";
 
             buttonMinigameCleaning.onClick.AddListener
             (
                 delegate { LoadMinigame("MinigameCleaning"); }
             );
-            buttonMinigameCleaning.GetComponentInChildren<Text>().text = "Clean";
 
             buttonMinigamePatting.onClick.AddListener
             (
                 delegate { LoadMinigame("MinigameBurping"); }
             );
-            buttonMinigamePatting.GetComponentInChildren<Text>().text = "Patting";
 
             // Player starts from day 1!
             NextDay();
