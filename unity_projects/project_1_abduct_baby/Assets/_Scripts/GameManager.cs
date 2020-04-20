@@ -105,7 +105,7 @@
             for (int i = 0; i < thurstScore; i++)
             {
                 // Store the score.
-                baby.toilet++;
+                baby.thurst++;
 
                 // Setup sounds.
                 scoringUpAudioSource.pitch = 1.00f + (float)i / thurstScore;
@@ -210,6 +210,9 @@
                 delegate { LoadMinigame("MinigameBoiling"); }
             );
             buttonMinigameBoiling.GetComponentInChildren<Text>().text = "Boil Milk";
+
+            // Player starts from day 1!
+            NextDay();
         }
 
         private void Update()

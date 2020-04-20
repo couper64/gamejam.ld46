@@ -47,6 +47,18 @@
                 // Prevent mood changes and scene unloading.
                 if (!isFinished) 
                 {
+                    // Find and destroy spoon.
+                    Spoon spoon = FindObjectOfType<Spoon>();
+
+                    // Destroy only if exists.
+                    if (spoon != null) 
+                    {
+                        Destroy(spoon.gameObject);
+                    }
+
+                    // Show cursor.
+                    Cursor.visible = true;
+
                     // Show GameOver panel.
                     panelGameOver.SetActive(true);
 

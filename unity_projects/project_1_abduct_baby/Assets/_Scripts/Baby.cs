@@ -17,12 +17,14 @@
         }
 
         public float hunger;
+        public float thurst;
         public float cleanliness;
-        public float toilet;
+        public float burp;
 
-        public Text hungerLabel;
-        public Text cleanlinessLabel;
-        public Text toiletLabel;
+        public Slider sliderHunger;
+        public Slider sliderThurst;
+        public Slider sliderCleanliness;
+        public Slider sliderBurp;
 
         public Animator animator;
         public AnimationState animationState;
@@ -58,16 +60,16 @@
 
         private void Update()
         {
-            hungerLabel.text = string.Format("Hunger: {0}", hunger.ToString("0.0"));
-            cleanlinessLabel.text = string.Format
-            (
-                "Cleanliness: {0}", 
-                cleanliness.ToString("0.0")
-            );
-            toiletLabel.text = string.Format("Toilet: {0}", toilet.ToString("0.0"));
+            // Update Baby's HUD Stats.
+            sliderHunger.value = hunger;
+            sliderThurst.value = thurst;
+            sliderCleanliness.value = cleanliness;
+            sliderBurp.value = burp;
 
+            // Update animation state in animator component.
             animator.SetInteger(animatorParameterId, (int)animationState);
 
+            // Reaction to animation states.
             switch (animationState)
             {
                 case AnimationState.Idle: 
@@ -78,15 +80,6 @@
                     mouthCollider.enabled = false;
                     break;
             }
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            hunger++;
-        }
-
-        private void OnTriggerExit2D(Collider2D collision)
-        {
         }
     }
 }
