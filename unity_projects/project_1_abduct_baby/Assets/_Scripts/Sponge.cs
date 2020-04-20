@@ -26,28 +26,24 @@
 			Cursor.visible = true;
 		}
 
-		private void OnTriggerStay(Collider other)
+		private void OnTriggerStay2D(Collider2D collision)
 		{
-			if (Input.GetMouseButton(0)) 
+			if (Input.GetMouseButton(0))
 			{
 				// Keep cleaning until none.
-				DirtySpot spot = other.GetComponent<DirtySpot>();
+				DirtySpot spot = collision.gameObject.GetComponent<DirtySpot>();
 
-				// Null checking.
-				if (!spot) 
+				// Local variables.
+				float distance;
+
+				// Calculate.
+				distance = Vector2.Distance(lastMousePosition, Input.mousePosition);
+
+				// Checking.
+				if (spot && (distance != 0.00f))
 				{
-					// Local variables.
-					float delta;
-
-					// Distance.
-					delta = Vector2.Distance
-					(
-						lastMousePosition, 
-						Input.mousePosition
-					);
-
 					// Apply washing strength.
-					spot.dirtiness -= Time.deltaTime * delta;
+					spot.dirtiness -= Time.deltaTime * 100.00f;
 				}
 			}
 		}
