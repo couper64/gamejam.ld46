@@ -18,6 +18,7 @@
         public int animatorParameterId;
 
         public BoxCollider2D mouthCollider;
+        public CircleCollider2D mistakeCollider;
 
         public void SetDefaultMood()
         {
@@ -43,6 +44,7 @@
             animatorParameterId = Animator.StringToHash("State");
 
             mouthCollider = GetComponent<BoxCollider2D>();
+            mistakeCollider = GetComponent<CircleCollider2D>();
         }
 
         private void Update()
@@ -55,10 +57,12 @@
             {
                 case AnimationState.Idle:
                     mouthCollider.enabled = true;
+                    mistakeCollider.enabled = false;
                     break;
 
                 case AnimationState.Closed_Mouth:
                     mouthCollider.enabled = false;
+                    mistakeCollider.enabled = true;
                     break;
             }
         }

@@ -43,19 +43,19 @@
             );
             cleanliness = Mathf.Clamp
             (
-                hunger,
+                cleanliness,
                 sliderCleanliness.minValue,
                 sliderCleanliness.maxValue
             );
             thurst = Mathf.Clamp
             (
-                hunger,
+                thurst,
                 sliderThurst.minValue,
                 sliderThurst.maxValue
             );
             burp = Mathf.Clamp
             (
-                hunger,
+                burp,
                 sliderBurp.minValue,
                 sliderBurp.maxValue
             );

@@ -16,6 +16,12 @@
         public float moodDuration;
         public float moodMaxDuration;
 
+        public bool isScored;
+        public float scoreBad;
+        public float scoreNotBad;
+        public float scoreGood;
+        public float scorePerfect;
+
         public int score;
         public Slider sliderScore;
 
@@ -24,6 +30,9 @@
         public bool isFinished;
         public GameObject panelGameOver;
         public Text gameOverLabel;
+
+        public AudioSource audioSourceGood;
+        public AudioSource audioSourceBad;
 
         public void SetFinished(bool finished) 
         {
@@ -35,10 +44,19 @@
             // Setup slider to meet timer settings.
             sliderTimer.maxValue = duration;
             sliderTimer.value = duration;
+
+            // Start score.
+            score = 20;
         }
 
         private void Update()
         {
+            // Limit the score.
+            if (score < 0 && !isScored) 
+            {
+                score = 0;
+            }
+
             // Update user with a new score.
             sliderScore.value = score;
 
@@ -72,13 +90,51 @@
                     // Show GameOver panel.
                     panelGameOver.SetActive(true);
 
+                    // Calculate score.
+                    if (score < scoreBad && !isScored)
+                    {
+                        // Baby didn't feel full, shame.
+                        score = -20;
+                    }
+                    else if (score < scoreNotBad && !isScored)
+                    {
+                        // Not bad.
+                        score = 20;
+                    }
+                    else if (score < scoreGood && !isScored)
+                    {
+                        // Good.
+                        score = 40;
+                    }
+                    else if (!isScored)
+                    {
+                        // Perfect!
+                        score = 50;
+                        score += (int)(score / scorePerfect * 1 / scorePerfect);
+                    }
+
+                    // Do scoring only once.
+                    isScored = true;
+
                     // Prepare the message.
-                    gameOverLabel.text = string.Format
-                    (
-                        "Congratulations! You gain " + 
-                        "<color=green>+{0}</color> points of hunger.",
-                        score
-                    );
+                    if (score > 0)
+                    {
+                        gameOverLabel.text = string.Format
+                        (
+                            "Congratulations! You gain " +
+                            "<color=green>+{0}</color> points of hunger.",
+                            score
+                        );
+                    }
+                    else 
+                    {
+                        gameOverLabel.text = string.Format
+                        (
+                            "We believe in you! You gain " +
+                            "<color=red>{0}</color> points of hunger.",
+                            score
+                        );
+                    }
 
                     return;
                 }
@@ -94,12 +150,27 @@
 
                 // Local variabbles.
                 GameManager gameManager;
+                int thrust;
+                int cleanliness;
+                int burp;
+
+                // Randomise penalties.
+                thrust = Random.Range(-1, -15);
+                cleanliness = Random.Range(-1, -15);
+                burp = Random.Range(-1, -15);
 
                 // Find.
                 gameManager = FindObjectOfType<GameManager>();
 
                 // And, return back to gameplay scene.
-                gameManager.UnloadMinigame("MinigameFeeding", score, 0, 0, 0);
+                gameManager.UnloadMinigame
+                (
+                    "MinigameFeeding", 
+                    score, 
+                    cleanliness, 
+                    thrust, 
+                    burp
+                );
             }
 
             // Mood ticking.

@@ -69,10 +69,13 @@
             }
 
             // Do increment animation for hunger.
-            for (int i = 0; i < hungerScore; i++)
+            for (int i = 0; i < Mathf.Abs(hungerScore); i++)
             {
+                // Make a decision to subtract or add.
+                float direction = hungerScore > 0 ? 1 : -1;
+
                 // Store the score.
-                baby.hunger++;
+                baby.hunger += direction;
 
                 // Setup sounds.
                 scoringUpAudioSource.pitch = 1.00f + (float)i / hungerScore;
@@ -80,17 +83,41 @@
                 // Play sounds.
                 scoringUpAudioSource.Play();
 
-                yield return new WaitForSeconds(duration / hungerScore);
+                yield return new WaitForSeconds(duration / Mathf.Abs(hungerScore));
             }
 
             // Reset.
             scoringUpAudioSource.pitch = 1.00f;
 
             // Do increment animation for hunger.
-            for (int i = 0; i < cleanlinessScore; i++)
+            for (int i = 0; i < Mathf.Abs(thurstScore); i++)
             {
+                // Make a decision to subtract or add.
+                float direction = thurstScore > 0 ? 1 : -1;
+
                 // Store the score.
-                baby.cleanliness++;
+                baby.thurst += direction;
+
+                // Setup sounds.
+                scoringUpAudioSource.pitch = 1.00f + (float)i / thurstScore;
+
+                // Play sounds.
+                scoringUpAudioSource.Play();
+
+                yield return new WaitForSeconds(duration / Mathf.Abs(thurstScore));
+            }
+
+            // Reset.
+            scoringUpAudioSource.pitch = 1.00f;
+
+            // Do increment animation for hunger.
+            for (int i = 0; i < Mathf.Abs(cleanlinessScore); i++)
+            {
+                // Make a decision to subtract or add.
+                float direction = cleanlinessScore > 0 ? 1 : -1;
+
+                // Store the score.
+                baby.cleanliness += direction;
 
                 // Setup sounds.
                 scoringUpAudioSource.pitch = 1.00f + (float)i / cleanlinessScore;
@@ -98,17 +125,23 @@
                 // Play sounds.
                 scoringUpAudioSource.Play();
 
-                yield return new WaitForSeconds(duration / cleanlinessScore);
+                yield return new WaitForSeconds
+                (
+                    duration / Mathf.Abs(cleanlinessScore)
+                );
             }
 
             // Reset.
             scoringUpAudioSource.pitch = 1.00f;
 
             // Do increment animation for hunger.
-            for (int i = 0; i < thurstScore; i++)
+            for (int i = 0; i < Mathf.Abs(burpScore); i++)
             {
+                // Make a decision to subtract or add.
+                float direction = burpScore > 0 ? 1 : -1;
+
                 // Store the score.
-                baby.thurst++;
+                baby.burp += direction;
 
                 // Setup sounds.
                 scoringUpAudioSource.pitch = 1.00f + (float)i / thurstScore;
@@ -116,25 +149,7 @@
                 // Play sounds.
                 scoringUpAudioSource.Play();
 
-                yield return new WaitForSeconds(duration / thurstScore);
-            }
-
-            // Reset.
-            scoringUpAudioSource.pitch = 1.00f;
-
-            // Do increment animation for hunger.
-            for (int i = 0; i < thurstScore; i++)
-            {
-                // Store the score.
-                baby.burp++;
-
-                // Setup sounds.
-                scoringUpAudioSource.pitch = 1.00f + (float)i / thurstScore;
-
-                // Play sounds.
-                scoringUpAudioSource.Play();
-
-                yield return new WaitForSeconds(duration / thurstScore);
+                yield return new WaitForSeconds(duration / Mathf.Abs(burpScore));
             }
 
             // Reset.
