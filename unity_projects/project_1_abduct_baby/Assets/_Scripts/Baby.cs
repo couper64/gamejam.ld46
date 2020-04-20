@@ -26,6 +26,11 @@
         public Slider sliderCleanliness;
         public Slider sliderBurp;
 
+        public Text textHunger;
+        public Text textThurst;
+        public Text textCleanliness;
+        public Text textBurp;
+
         public Animator animator;
         public AnimationState animationState;
         public int animatorParameterId;
@@ -56,15 +61,27 @@
             animatorParameterId = Animator.StringToHash("State");
 
             mouthCollider = GetComponent<BoxCollider2D>();
+
+            // Start game settings.
+            hunger = 80.00f;
+            thurst = 80.00f;
+            cleanliness = 80.00f;
+            burp = 80.00f;
         }
 
         private void Update()
         {
-            // Update Baby's HUD Stats.
+            // Update Baby's HUD Slider Stats.
             sliderHunger.value = hunger;
             sliderThurst.value = thurst;
             sliderCleanliness.value = cleanliness;
             sliderBurp.value = burp;
+
+            // Update Baby's HUD Text Stats.
+            textHunger.text = hunger.ToString("00");
+            textThurst.text = thurst.ToString("00");
+            textCleanliness.text = cleanliness.ToString("00");
+            textBurp.text = burp.ToString("00");
 
             // Update animation state in animator component.
             animator.SetInteger(animatorParameterId, (int)animationState);

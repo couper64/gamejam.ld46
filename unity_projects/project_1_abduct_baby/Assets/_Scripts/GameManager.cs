@@ -31,6 +31,8 @@
         public Text userLog;
         public Button buttonMinigameFeeding;
         public Button buttonMinigameBoiling;
+        public Button buttonMinigameCleaning;
+        public Button buttonMinigamePatting;
         public Canvas canvasMain;
         public AudioSource mouseAudioSource;
         public AudioSource scoringUpAudioSource;
@@ -41,6 +43,7 @@
             int hungerScore, 
             int cleanlinessScore, 
             int thurstScore, 
+            int burpScore, 
             float duration
         ) 
         {
@@ -49,7 +52,7 @@
             {
                 Transform childTransform = canvasMain.transform.GetChild(i);
 
-                if (childTransform.name.StartsWith("PanelRight"))
+                if (childTransform.name.StartsWith("PanelActions"))
                 {
                     // Local variables;
                     Button[] buttons;
@@ -119,12 +122,30 @@
             // Reset.
             scoringUpAudioSource.pitch = 1.00f;
 
+            // Do increment animation for hunger.
+            for (int i = 0; i < thurstScore; i++)
+            {
+                // Store the score.
+                baby.burp++;
+
+                // Setup sounds.
+                scoringUpAudioSource.pitch = 1.00f + (float)i / thurstScore;
+
+                // Play sounds.
+                scoringUpAudioSource.Play();
+
+                yield return new WaitForSeconds(duration / thurstScore);
+            }
+
+            // Reset.
+            scoringUpAudioSource.pitch = 1.00f;
+
             // Fade in others.
             for (int i = 0; i < canvasMain.transform.childCount; i++)
             {
                 Transform childTransform = canvasMain.transform.GetChild(i);
 
-                if (childTransform.name.StartsWith("PanelRight"))
+                if (childTransform.name.StartsWith("PanelActions"))
                 {
                     // Local variables;
                     Button[] buttons;
@@ -173,7 +194,8 @@
             string sceneName, 
             int hungerScore, 
             int cleanlinessScore, 
-            int thurstScore
+            int thurstScore,
+            int burpScore
         ) 
         {
             // Unload it.
@@ -188,7 +210,14 @@
             // Do scoring and show results.
             StartCoroutine
             (
-                ShowScore(hungerScore, cleanlinessScore, thurstScore, 5.00f)
+                ShowScore
+                (
+                    hungerScore, 
+                    cleanlinessScore, 
+                    thurstScore, 
+                    burpScore, 
+                    5.00f
+                )
             );
         }
 
@@ -210,6 +239,12 @@
                 delegate { LoadMinigame("MinigameBoiling"); }
             );
             buttonMinigameBoiling.GetComponentInChildren<Text>().text = "Boil Milk";
+
+            buttonMinigameCleaning.onClick.AddListener
+            (
+                delegate { LoadMinigame("MinigameCleaning"); }
+            );
+            buttonMinigameCleaning.GetComponentInChildren<Text>().text = "Clean";
 
             // Player starts from day 1!
             NextDay();

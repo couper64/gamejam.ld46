@@ -6,7 +6,7 @@
     // Toggle, Slider, Text.
     using UnityEngine.UI;
 
-    public class MinigameBoilingManager : MonoBehaviour
+    public class MinigameCleaningManager : MonoBehaviour
     {
         public float timer;
         public float duration;
@@ -19,26 +19,16 @@
         public GameObject panelGameOver;
         public Text gameOverLabel;
 
-        public Toggle toggleStove;
-        public Slider sliderFireStrength;
-        public Text temperatureLabel;
-
         public Text timerLabel;
 
-        public void SetFinished(bool finished)
+        public void SetFinished(bool finished) 
         {
             isFinished = finished;
         }
 
         private void Update()
         {
-            // Start the game only when we turn on the stove.
-            if (!toggleStove.isOn) 
-            {
-                return;
-            }
-
-            // Ticking.
+            // Minigame ticking.
             timer += Time.deltaTime;
 
             // Let user know.
@@ -51,16 +41,28 @@
                 timer = duration;
 
                 // Prevent mood changes and scene unloading.
-                if (!isFinished)
+                if (!isFinished) 
                 {
+                    // Find and destroy spoon.
+                    Sponge sponge = FindObjectOfType<Sponge>();
+
+                    // Destroy only if exists.
+                    if (sponge != null) 
+                    {
+                        Destroy(sponge.gameObject);
+                    }
+
+                    // Show cursor.
+                    Cursor.visible = true;
+
                     // Show GameOver panel.
                     panelGameOver.SetActive(true);
 
                     // Prepare the message.
                     gameOverLabel.text = string.Format
                     (
-                        "Congratulations! You gain " +
-                        "<color=green>+{0}</color> points of thurst.",
+                        "Congratulations! You gain " + 
+                        "<color=green>+{0}</color> points of hunger.",
                         score
                     );
 
@@ -77,10 +79,8 @@
                 gameManager.baby.SetDefaultMood();
 
                 // And, return back to gameplay scene.
-                gameManager.UnloadMinigame("MinigameBoiling", 0, 0, score, 0);
+                gameManager.UnloadMinigame("MinigameCleaning", 0, score, 0, 0);
             }
-
-            temperatureLabel.text = sliderFireStrength.value.ToString() + " (c)";
         }
     }
 }
