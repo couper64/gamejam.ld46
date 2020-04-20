@@ -36,7 +36,13 @@
         public AudioSource scoringUpAudioSource;
         public Baby baby;
 
-        private IEnumerator ShowScore(int score, float duration) 
+        private IEnumerator ShowScore
+        (
+            int hungerScore, 
+            int cleanlinessScore, 
+            int thurstScore, 
+            float duration
+        ) 
         {
             // Find children and fade out others.
             for (int i = 0; i < canvasMain.transform.childCount; i++)
@@ -59,19 +65,55 @@
                 }
             }
 
-            // Do increment animation.
-            for (int i = 0; i < score; i++)
+            // Do increment animation for hunger.
+            for (int i = 0; i < hungerScore; i++)
             {
                 // Store the score.
                 baby.hunger++;
 
                 // Setup sounds.
-                scoringUpAudioSource.pitch = 1.00f + (float)i / score;
+                scoringUpAudioSource.pitch = 1.00f + (float)i / hungerScore;
 
                 // Play sounds.
                 scoringUpAudioSource.Play();
 
-                yield return new WaitForSeconds(duration / score);
+                yield return new WaitForSeconds(duration / hungerScore);
+            }
+
+            // Reset.
+            scoringUpAudioSource.pitch = 1.00f;
+
+            // Do increment animation for hunger.
+            for (int i = 0; i < cleanlinessScore; i++)
+            {
+                // Store the score.
+                baby.cleanliness++;
+
+                // Setup sounds.
+                scoringUpAudioSource.pitch = 1.00f + (float)i / cleanlinessScore;
+
+                // Play sounds.
+                scoringUpAudioSource.Play();
+
+                yield return new WaitForSeconds(duration / cleanlinessScore);
+            }
+
+            // Reset.
+            scoringUpAudioSource.pitch = 1.00f;
+
+            // Do increment animation for hunger.
+            for (int i = 0; i < thurstScore; i++)
+            {
+                // Store the score.
+                baby.toilet++;
+
+                // Setup sounds.
+                scoringUpAudioSource.pitch = 1.00f + (float)i / thurstScore;
+
+                // Play sounds.
+                scoringUpAudioSource.Play();
+
+                yield return new WaitForSeconds(duration / thurstScore);
             }
 
             // Reset.
@@ -112,6 +154,9 @@
 
             // Stop updating.
             enabled = false;
+
+            // Load start screen.
+            SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
         }
 
         public void LoadMinigame(string sceneName) 
@@ -123,7 +168,13 @@
             canvasMain.gameObject.SetActive(false);
         }
 
-        public void UnloadMinigame(string sceneName, int score) 
+        public void UnloadMinigame
+        (
+            string sceneName, 
+            int hungerScore, 
+            int cleanlinessScore, 
+            int thurstScore
+        ) 
         {
             // Unload it.
             SceneManager.UnloadSceneAsync(sceneName);
@@ -135,7 +186,10 @@
             eventsCount++;
 
             // Do scoring and show results.
-            StartCoroutine(ShowScore(score, 5.00f));
+            StartCoroutine
+            (
+                ShowScore(hungerScore, cleanlinessScore, thurstScore, 5.00f)
+            );
         }
 
         public void NextDay() 

@@ -71,7 +71,7 @@
                 gameManager.baby.SetDefaultMood();
 
                 // And, return back to gameplay scene.
-                gameManager.UnloadMinigame("MinigameFeeding", score);
+                gameManager.UnloadMinigame("MinigameFeeding", score, 0, 0);
             }
 
             // Mood ticking.
