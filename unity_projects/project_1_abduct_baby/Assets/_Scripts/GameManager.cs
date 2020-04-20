@@ -105,7 +105,7 @@
             for (int i = 0; i < thurstScore; i++)
             {
                 // Store the score.
-                baby.toilet++;
+                baby.thurst++;
 
                 // Setup sounds.
                 scoringUpAudioSource.pitch = 1.00f + (float)i / thurstScore;
