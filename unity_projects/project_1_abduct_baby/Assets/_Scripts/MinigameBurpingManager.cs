@@ -25,12 +25,17 @@
         // after finishing the game.
         public bool isFinished;
         public GameObject panelGameOver;
-        public Text gameOverLabel;
-
-        public Text timerLabel;
+        public Text textHunger;
+        public Text textThurst;
+        public Text textCleanliness;
+        public Text textBurp;
 
         public Hand hand;
         public float difficultyRate;
+
+        public int penaltyThurst;
+        public int penaltyCleanliness;
+        public int penaltyHunger;
 
         public void SetFinished(bool finished) 
         {
@@ -45,6 +50,11 @@
 
             // Start score.
             score = 20;
+
+            // Randomise penalties.
+            penaltyThurst = Random.Range(-1, -15);
+            penaltyCleanliness = Random.Range(-1, -15);
+            penaltyHunger = Random.Range(-1, -15);
         }
 
         private void Update()
@@ -120,36 +130,46 @@
                     // Prepare the message.
                     if (score > 0)
                     {
-                        gameOverLabel.text = string.Format
+                        textBurp.text = string.Format
                         (
-                            "Congratulations! You gain " +
-                            "<color=green>+{0}</color> points of hunger.",
+                            "<color=#ffffff>Burp</color>" +
+                            " <color=#00FF00>+{0}</color>",
                             score
                         );
                     }
                     else
                     {
-                        gameOverLabel.text = string.Format
+                        textBurp.text = string.Format
                         (
-                            "We believe in you! You gain " +
-                            "<color=red>{0}</color> points of hunger.",
+                            "<color=#ffffff>Burp</color>" +
+                            " <color=red>{0}</color>",
                             score
                         );
                     }
+
+                    textThurst.text = string.Format
+                    (
+                        "<color=#ffffff>Thurst</color> <color=red>{0}</color>",
+                        penaltyThurst
+                    );
+
+                    textCleanliness.text = string.Format
+                    (
+                        "<color=#ffffff>Cleanliness</color> <color=red>{0}</color>",
+                        penaltyCleanliness
+                    );
+
+                    textHunger.text = string.Format
+                    (
+                        "<color=#ffffff>Hunger</color> <color=red>{0}</color>",
+                        penaltyHunger
+                    );
 
                     return;
                 }
 
                 // Local variabbles.
                 GameManager gameManager;
-                int hunger;
-                int thrust;
-                int cleanliness;
-
-                // Randomise penalties.
-                hunger = Random.Range(-1, -15);
-                thrust = Random.Range(-1, -15);
-                cleanliness = Random.Range(-1, -15);
 
                 // Find.
                 gameManager = FindObjectOfType<GameManager>();
@@ -158,9 +178,9 @@
                 gameManager.UnloadMinigame
                 (
                     "MinigameBurping",
-                    hunger,
-                    cleanliness,
-                    thrust,
+                    penaltyHunger,
+                    penaltyCleanliness,
+                    penaltyThurst,
                     score
                 );
             }

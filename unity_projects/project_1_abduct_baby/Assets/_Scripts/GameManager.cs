@@ -77,13 +77,30 @@
                 // Store the score.
                 baby.hunger += direction;
 
+                // Enlarge effect.
+                if (baby.hunger >= 99) 
+                {
+                    baby.textHunger.fontSize = 300;
+                }
+
                 // Setup sounds.
                 scoringUpAudioSource.pitch = 1.00f + (float)i / hungerScore;
 
                 // Play sounds.
                 scoringUpAudioSource.Play();
 
-                yield return new WaitForSeconds(duration / Mathf.Abs(hungerScore));
+                yield return new WaitForSeconds
+                (
+                    0.50f * duration / Mathf.Abs(hungerScore)
+                );
+
+                // Set default font size.
+                baby.textHunger.fontSize = 250;
+
+                yield return new WaitForSeconds
+                (
+                    0.50f * duration / Mathf.Abs(hungerScore)
+                );
             }
 
             // Reset.
@@ -98,13 +115,30 @@
                 // Store the score.
                 baby.thurst += direction;
 
+                // Enlarge effect.
+                if (baby.thurst >= 99)
+                {
+                    baby.textThurst.fontSize = 300;
+                }
+
                 // Setup sounds.
                 scoringUpAudioSource.pitch = 1.00f + (float)i / thurstScore;
 
                 // Play sounds.
                 scoringUpAudioSource.Play();
 
-                yield return new WaitForSeconds(duration / Mathf.Abs(thurstScore));
+                yield return new WaitForSeconds
+                (
+                    0.50f * duration / Mathf.Abs(thurstScore)
+                );
+
+                // Set default font size.
+                baby.textThurst.fontSize = 250;
+
+                yield return new WaitForSeconds
+                (
+                    0.50f * duration / Mathf.Abs(thurstScore)
+                );
             }
 
             // Reset.
@@ -119,6 +153,12 @@
                 // Store the score.
                 baby.cleanliness += direction;
 
+                // Enlarge effect.
+                if (baby.cleanliness >= 99)
+                {
+                    baby.textCleanliness.fontSize = 300;
+                }
+
                 // Setup sounds.
                 scoringUpAudioSource.pitch = 1.00f + (float)i / cleanlinessScore;
 
@@ -127,7 +167,15 @@
 
                 yield return new WaitForSeconds
                 (
-                    duration / Mathf.Abs(cleanlinessScore)
+                    0.50f * duration / Mathf.Abs(cleanlinessScore)
+                );
+
+                // Set default font size.
+                baby.textCleanliness.fontSize = 250;
+
+                yield return new WaitForSeconds
+                (
+                    0.50f * duration / Mathf.Abs(cleanlinessScore)
                 );
             }
 
@@ -143,13 +191,30 @@
                 // Store the score.
                 baby.burp += direction;
 
+                // Enlarge effect.
+                if (baby.burp >= 99)
+                {
+                    baby.textBurp.fontSize = 300;
+                }
+
                 // Setup sounds.
                 scoringUpAudioSource.pitch = 1.00f + (float)i / burpScore;
 
                 // Play sounds.
                 scoringUpAudioSource.Play();
 
-                yield return new WaitForSeconds(duration / Mathf.Abs(burpScore));
+                yield return new WaitForSeconds
+                (
+                    0.50f * duration / Mathf.Abs(burpScore)
+                );
+
+                // Set default font size.
+                baby.textBurp.fontSize = 250;
+
+                yield return new WaitForSeconds
+                (
+                    0.50f * duration / Mathf.Abs(burpScore)
+                );
             }
 
             // Reset.
@@ -231,7 +296,7 @@
                     cleanlinessScore, 
                     thurstScore, 
                     burpScore, 
-                    5.00f
+                    3.00f
                 )
             );
         }
