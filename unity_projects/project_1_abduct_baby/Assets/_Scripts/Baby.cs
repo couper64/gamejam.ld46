@@ -35,10 +35,30 @@
         private void Update()
         {
             // First control the range of the score.
-            hunger %= sliderHunger.maxValue;
-            cleanliness %= sliderCleanliness.maxValue;
-            thurst %= sliderThurst.maxValue;
-            burp %= sliderBurp.maxValue;
+            hunger = Mathf.Clamp
+            (
+                hunger, 
+                sliderHunger.minValue, 
+                sliderHunger.maxValue
+            );
+            cleanliness = Mathf.Clamp
+            (
+                hunger,
+                sliderCleanliness.minValue,
+                sliderCleanliness.maxValue
+            );
+            thurst = Mathf.Clamp
+            (
+                hunger,
+                sliderThurst.minValue,
+                sliderThurst.maxValue
+            );
+            burp = Mathf.Clamp
+            (
+                hunger,
+                sliderBurp.minValue,
+                sliderBurp.maxValue
+            );
 
             // Update Baby's HUD Slider Stats.
             sliderHunger.value = hunger;
