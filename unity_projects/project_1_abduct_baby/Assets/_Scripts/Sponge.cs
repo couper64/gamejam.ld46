@@ -8,6 +8,8 @@
 
 		public Vector2 lastMousePosition;
 
+		public AudioSource audioSourceScurbbing;
+
 		private void Start()
 		{
 			Cursor.visible = false;
@@ -44,8 +46,18 @@
 				{
 					// Apply washing strength.
 					spot.dirtiness -= Time.deltaTime * 100.00f;
+
+					if (!audioSourceScurbbing.isPlaying) 
+					{
+						audioSourceScurbbing.Play();
+					}
 				}
 			}
+		}
+
+		private void OnTriggerExit2D(Collider2D collision)
+		{
+			audioSourceScurbbing.Stop();
 		}
 	}
 }
