@@ -30,8 +30,6 @@
         public Text textCleanliness;
         public Text textBurp;
 
-        public Text timerLabel;
-
         public int penaltyThurst;
         public int penaltyHunger;
         public int penaltyBurp;
@@ -89,6 +87,19 @@
                     if (sponge != null) 
                     {
                         Destroy(sponge.gameObject);
+                    }
+
+                    // Find and destroy spoon.
+                    BabyCleaning baby = FindObjectOfType<BabyCleaning>();
+
+                    // Destroy only if exists.
+                    if (baby != null)
+                    {
+                        // Stop spawning dirty spots.
+                        baby.enabled = false;
+
+                        // Reset timer just in case.
+                        baby.timer = 0.00f;
                     }
 
                     // Show cursor.

@@ -1,6 +1,5 @@
 ﻿namespace LD46
 {
-    using System;
     using System.Collections;
 
     // MonoBehaviour.
