@@ -24,6 +24,7 @@
     /// </summary>
     public class GameManager : MonoBehaviour
     {
+        public bool isScoring;
         public int dayCount;
         public int dayFinal;
         public int eventsCount;
@@ -240,6 +241,8 @@
                     }
                 }
             }
+
+            isScoring = false;
         }
 
         public void GameOver() 
@@ -287,6 +290,14 @@
             // Increment events counter.
             eventsCount++;
 
+            if (isScoring) 
+            {
+                return;
+            }
+
+            // Lock operation.
+            isScoring = true;
+
             // Do scoring and show results.
             StartCoroutine
             (
@@ -296,7 +307,7 @@
                     cleanlinessScore, 
                     thurstScore, 
                     burpScore, 
-                    3.00f
+                    5.00f
                 )
             );
         }
