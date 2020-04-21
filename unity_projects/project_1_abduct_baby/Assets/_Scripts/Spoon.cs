@@ -85,13 +85,13 @@
 				audioSourceGood.Play();
 
 				// Local variables;
-				MinigameFeedingManager manager;
+				MinigameBoilingManager manager;
 				
 				// Find.
-				manager = FindObjectOfType<MinigameFeedingManager>();
+				manager = FindObjectOfType<MinigameBoilingManager>();
 
 				// Scoring.
-				FindObjectOfType<MinigameFeedingManager>().score += 15;
+				FindObjectOfType<MinigameBoilingManager>().score += 15;
 
 				// Reactive music.
 				manager.audioSourceGood.Play();
@@ -99,15 +99,15 @@
 			else 
 			{
 				audioSourceBad.Play();
-				
+
 				// Local variables;
-				MinigameFeedingManager manager;
+				MinigameBoilingManager manager;
 
 				// Find.
-				manager = FindObjectOfType<MinigameFeedingManager>();
+				manager = FindObjectOfType<MinigameBoilingManager>();
 
 				// Scoring.
-				FindObjectOfType<MinigameFeedingManager>().score -= 5;
+				FindObjectOfType<MinigameBoilingManager>().score -= 5;
 
 				// Reactive music.
 				manager.audioSourceBad.Play();

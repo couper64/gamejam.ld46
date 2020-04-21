@@ -9,6 +9,16 @@
 
 	public class Hand : MonoBehaviour
 	{
+		public enum AnimationState
+		{
+			Idle = 0,
+			Burping = 1
+		}
+
+		public Animator animator;
+		public AnimationState animationState;
+		public int animatorParameterId;
+
 		public Rigidbody2D rb;
 
 		public int rewardBad;
@@ -36,6 +46,10 @@
 		{
 			Cursor.visible = false;
 			rb = GetComponent<Rigidbody2D>();
+
+			animator = GetComponentInChildren<Animator>();
+			animationState = AnimationState.Idle;
+			animatorParameterId = Animator.StringToHash("State");
 		}
 
 		private void Update()
@@ -62,13 +76,32 @@
 				isSliderGrowing = true;
 			}
 
-			if (Input.GetMouseButtonUp(0)) 
+			// Update animation state in animator component.
+			animator.SetInteger(animatorParameterId, (int)animationState);
+
+			// Reaction to animation states.
+			switch (animationState)
+			{
+				case AnimationState.Idle:
+					break;
+
+				case AnimationState.Burping:
+					break;
+			}
+
+			if (Input.GetMouseButtonDown(0)) 
+			{
+				animationState = AnimationState.Burping;
+			}
+			else if (Input.GetMouseButtonUp(0)) 
 			{
 				// Local variables.
 				MinigameBurpingManager manager;
 
 				// Find that manager.
 				manager = FindObjectOfType<MinigameBurpingManager>();
+
+				animationState = AnimationState.Idle;
 
 				if (sliderBurp.value < sliderBadGroup)
 				{
