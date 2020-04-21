@@ -1999,6 +1999,8 @@ MonoBehaviour:
   spoonCollider: {fileID: 0}
   audioSourceGood: {fileID: 703315834}
   audioSourceBad: {fileID: 745843147}
+  boilingManager: {fileID: 0}
+  feedingManager: {fileID: 1146675195}
 --- !u!61 &1837714715
 BoxCollider2D:
   m_ObjectHideFlags: 0

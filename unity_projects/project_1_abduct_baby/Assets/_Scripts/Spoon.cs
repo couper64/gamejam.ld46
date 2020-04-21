@@ -26,6 +26,9 @@
 		public AudioSource audioSourceGood;
 		public AudioSource audioSourceBad;
 
+		public MinigameBoilingManager boilingManager;
+		public MinigameFeedingManager feedingManager;
+
 		private void Start()
 		{
 			Cursor.visible = false;
@@ -84,33 +87,33 @@
 			{
 				audioSourceGood.Play();
 
-				// Local variables;
-				MinigameBoilingManager manager;
-				
-				// Find.
-				manager = FindObjectOfType<MinigameBoilingManager>();
-
-				// Scoring.
-				FindObjectOfType<MinigameBoilingManager>().score += 15;
-
 				// Reactive music.
-				manager.audioSourceGood.Play();
+				if (boilingManager) 
+				{
+					boilingManager.score += 15;
+					boilingManager.audioSourceGood.Play();
+				}
+				if (feedingManager)
+				{
+					feedingManager.score += 15;
+					feedingManager.audioSourceGood.Play();
+				}
 			}
 			else 
 			{
 				audioSourceBad.Play();
 
-				// Local variables;
-				MinigameBoilingManager manager;
-
-				// Find.
-				manager = FindObjectOfType<MinigameBoilingManager>();
-
-				// Scoring.
-				FindObjectOfType<MinigameBoilingManager>().score -= 5;
-
 				// Reactive music.
-				manager.audioSourceBad.Play();
+				if (boilingManager)
+				{
+					boilingManager.score -= 5;
+					boilingManager.audioSourceBad.Play();
+				}
+				if (feedingManager)
+				{
+					feedingManager.score -= 5;
+					feedingManager.audioSourceBad.Play();
+				}
 			}
 
 			animationState = AnimationState.NoFood;

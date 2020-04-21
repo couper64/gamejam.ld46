@@ -156,7 +156,7 @@
 
                     textThurst.text = string.Format
                     (
-                        "<color=#ffffff>Thurst</color> <color=red>{0}</color>",
+                        "<color=#ffffff>Thirst</color> <color=red>{0}</color>",
                         penaltyThurst
                     );
 

@@ -133,7 +133,7 @@
                     {
                         textThurst.text = string.Format
                         (
-                            "<color=#ffffff>Thurst</color>" +
+                            "<color=#ffffff>Thirst</color>" +
                             " <color=#00FF00>+{0}</color>",
                             score
                         );
@@ -142,7 +142,7 @@
                     {
                         textThurst.text = string.Format
                         (
-                            "<color=#ffffff>Thurst</color>" +
+                            "<color=#ffffff>Thirst</color>" +
                             " <color=red>{0}</color>",
                             score
                         );

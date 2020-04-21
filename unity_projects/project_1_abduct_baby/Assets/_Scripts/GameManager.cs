@@ -245,19 +245,32 @@
             isScoring = false;
         }
 
-        public void GameOver() 
+        public IEnumerator GameOver() 
         {
             // Local variables.
             string message;
 
-            // Prepare.
-            message = "Game Over.";
+            float overall = 
+                baby.hunger + baby.thurst + baby.cleanliness + baby.burp;
+
+            if (overall > 250)
+            {
+                // Prepare.
+                message = "Child successfully return back to home. And no one noticed anomalies in his behavior. Game Over.";
+            }
+            else 
+            {
+                // Prepare.
+                message = "You actions led to disaster. The kid became a monster. Game Over.";
+            }
 
             // Output.
             userLog.text = message;
 
             // Stop updating.
             enabled = false;
+
+            yield return new WaitForSeconds(7.00f);
 
             // Load start screen.
             SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
@@ -352,7 +365,7 @@
 
             if (dayCount >= dayFinal) 
             {
-                GameOver();
+                StartCoroutine(GameOver());
             }
 
             if (eventsCount >= eventsMax) 

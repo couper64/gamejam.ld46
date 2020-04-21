@@ -222,7 +222,7 @@ Animator:
   m_GameObject: {fileID: 70097091}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 683f024863178b345adcc8bcf217c676, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8d2d5d00dddc11048ab57d0e785a212f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -270,7 +270,7 @@ SpriteRenderer:
   m_SortingLayerID: 1204158757
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 801d7f4bd4a69d444b3566d9434f80d6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f0ed7a7fb329f704ab0febe7d81c7f52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -528,6 +528,8 @@ MonoBehaviour:
   spoonCollider: {fileID: 0}
   audioSourceGood: {fileID: 1879972283}
   audioSourceBad: {fileID: 1214918656}
+  boilingManager: {fileID: 1808851248}
+  feedingManager: {fileID: 0}
 --- !u!4 &246241707
 Transform:
   m_ObjectHideFlags: 0
@@ -1661,7 +1663,7 @@ MonoBehaviour:
   textBurp: {fileID: 2119485137}
   audioSourceGood: {fileID: 1964758766}
   audioSourceBad: {fileID: 466492356}
-  penaltyThurst: 0
+  penaltyHunger: 0
   penaltyCleanliness: 0
   penaltyBurp: 0
 --- !u!4 &1808851249
@@ -1882,7 +1884,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9e5672d9310a8bc42a99aab1872d1da0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a3a748b4f695f034e91d904d0a9fde75, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
